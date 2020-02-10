@@ -1,0 +1,55 @@
+.ffl{
+    width: 100%;
+    top:0;
+    left:0;
+    padding: 0;
+    font-family: sans-serif;
+    background: #76c9e2;
+}
+
+.boxx{
+    width: auto;
+    padding: 40px;
+    background: #feffff;
+    text-align: center;
+}
+
+label{
+    color: black;
+}
+
+.TrabR{
+    height: 80px;
+
+}
+.input{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width: 350px;
+    outline: none;
+    color: black;
+    border-radius: 24px;
+    transition: 0.25s;
+    height: 50px;
+
+}
+
+.input:focus{
+ width: 430px;
+ border-color: #2ecc71;
+}
+.imglogo{
+    height: 100px;
+    width: 100px;
+    margin-right: 20px;
+}
+
+.h1logo{
+    margin-top: 25px;
+
+}
