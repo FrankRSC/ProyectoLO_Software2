@@ -1,7 +1,7 @@
 const {Router} = require('express');
 const router = Router();
 
-const {getAparatos, createAparato, getAparato,deleteAparato,updateAparato} = require('../controllers/aparatos.controlador');
+const {getAparatos, createAparato, getAparato,deleteAparato,updateAparato} = require('../controllers/AparatosControlador');
 
 router.route('/')
     //Obtener
@@ -10,9 +10,6 @@ router.route('/')
     .post(createAparato);
 
 router.route('/:id')
-    // .get(getAparato)
-    // //Actualizar algo en el servidor
-    // .put(updateAparato)
     // //Borrar
     .delete(deleteAparato);
 

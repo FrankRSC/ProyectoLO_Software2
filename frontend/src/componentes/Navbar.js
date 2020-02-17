@@ -4,18 +4,12 @@ import { Link } from 'react-router-dom';
 import fondo from '../Imagenes/imgJumbo.jpg';
 import { MDBNavbar } from "mdbreact"
 import Perfil from '../Imagenes/fotoPerfil.jpg';
-import {
-    Button,
-    Header,
-    Icon,
-    Menu,
-    Segment,
-    Sidebar,
-} from 'semantic-ui-react'
+import {Button,Header,Icon,Menu,Segment,Sidebar} from 'semantic-ui-react'
 
 
+//Clase donde van las funciones a utilizar en la vista
 export default class Navbar extends Component {
-
+    
     state = {
         animation: 'scale down',
         direction: 'left',
@@ -24,11 +18,13 @@ export default class Navbar extends Component {
         tipoUsuario: null
     }
 
+    //Esconder la navbar o mostrarla
     hola = (e) => {
         this.setState({ visible: !this.state.visible })
         e.preventDefault();
     }
 
+    //Cerrar sesion
     desconectar = () => {
         localStorage.setItem("id", 10000)
     }
@@ -36,6 +32,7 @@ export default class Navbar extends Component {
 
     render() {
 
+        //#region Aqui esta el patron prototype posiblemente lo borre
         //Patron Prototype
         function Usuario(Nombre, ApellidoPaterno){
             this.Nombre = Nombre;
@@ -61,17 +58,23 @@ export default class Navbar extends Component {
             
             return (this.getNombre() + " " + this.getApellido() + this.id)
         }
-        
+        //#endregion
 
+
+        //Obener el nombre, apellido y id del local storage del navegador
         let Admin = new Administrador(localStorage.getItem("Nombre"),localStorage.getItem("ApellidoPaterno"),localStorage.getItem("id"))
-
+        //Cambiar el local storage a administraciodor
         localStorage.setItem("administrador", Admin.getAdministrador())
-
-
+        
         const { animation, direction, visible } = this.state
+        //Variable para almacenar la navbar
         let div;
+        //Variable para almacenar las opcines disponibles
         let opciones;
+
+        //si el id del usuario es 13 significa que es administrador
         if (localStorage.getItem("id") === '13') {
+            //#region Codigo html de la navbar del admin
             div =
                 <div className="d-flex justify content-end">
                     <label className="mt-1 lead text-white">{localStorage.getItem("Usuario")}</label>
@@ -123,9 +126,12 @@ export default class Navbar extends Component {
                     </Menu.Item>
                     </Link>
                 </div>
-
+        //#endregion
+        
+        
+        //si el id del usuario es diferente de 10000, el usuario es un usuario registrado
         } else if (localStorage.getItem("id") != '10000') {
-
+        //#region Codigo html para la navbar del usuario logueado
             div = <div className="d-flex justify content-end">
                 <label className="mt-1 lead text-white">{localStorage.getItem("Usuario")}</label>
                 <div className="ml-3 dropleft">
@@ -179,7 +185,10 @@ export default class Navbar extends Component {
                     </Menu.Item>*/}
                 </div>
 
+        //#endregion
+        //es un usuario sin cuenta
         } else {
+            //#region Codigo html para navbar sin usuario
             div = <form class="form-inline my-2 my-lg-0">
                 <Link to="/Login"><button className="btn blue-gradient my-2 my-sm-0">Iniciar Sesion</button></Link>
 
@@ -212,11 +221,15 @@ export default class Navbar extends Component {
         </Link>*/}
                 
                 </div>
+        //#endregion
         }
 
 
 
         return (
+
+
+            //#region Codigo html
             <div>
                 <Sidebar.Pushable style={{ height: '100vh' }}>
 
@@ -245,7 +258,7 @@ export default class Navbar extends Component {
                     </Sidebar.Pusher>
                 </Sidebar.Pushable>
             </div>
-
+//#endregion
         )
     }
 }

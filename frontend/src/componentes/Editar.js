@@ -37,8 +37,12 @@ export default class Editar extends Component {
         })
     }
 
+
+    //Envio de los datos del formulario, a la vez que se validan
     onSubmit = async (e) => {
         var n,ap,af,d,t,c,p
+
+        //si el estado de algun campo se encuentra vacio, le agrega el nombre que tenia antes de enentrar a la edicion
         n = !this.state.nombre ? this.props.nombre : this.state.nombre
         ap = !this.state.apellidoP ? this.props.apellidoP : this.state.apellidoP
         af = !this.state.apellidoF ? this.props.apellidoF : this.state.apellidoF
@@ -46,6 +50,8 @@ export default class Editar extends Component {
         t = !this.state.telefono ? this.props.telefono : this.state.telefono
         c = !this.state.corre ? this.props.corre : this.state.corre
         p = !this.state.contraseña ? this.props.contraseña : this.state.contraseña
+
+        //Ejecuta el comando de validacion para ver si los datos estan correctos
         const isvalid = this.validar();
         const newCliente = {
             nombre: n,
@@ -56,7 +62,8 @@ export default class Editar extends Component {
             corre: c,
             contraseña: p
         }
-        console.log(newCliente, isvalid)
+        //Si los datos no son correctos refresca la pagina
+        //Si los datos son correctos se utiliza la peticion put para cambiar el usuario
         if(isvalid){
             await axios.put('http://localhost:4000/api/usuarios/' + this.props.id, newCliente)
             e.preventDefault();
@@ -67,11 +74,12 @@ export default class Editar extends Component {
     }
 
 
-
+    //Limpiar campos
     Limpiar = () =>{
         this.setState(initialState);
     }
 
+    //
     validar= () =>{
         let nombreError = ''
         let apellidoPError = ''
@@ -121,6 +129,7 @@ export default class Editar extends Component {
     }
     render() {
         return (
+            //#region Codigo html
             <div >
                 <div class="modal fade bd-example-modal-lg" id="Editar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
@@ -179,5 +188,6 @@ export default class Editar extends Component {
 
         )
     }
+    //#endregion
 }
 

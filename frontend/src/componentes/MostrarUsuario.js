@@ -6,6 +6,7 @@ import Editar from './Editar'
 
 export default class MostrarUsuario extends Component {
 
+    //Variables
     state = {
         usuarios: [],
         id: '',
@@ -23,12 +24,15 @@ export default class MostrarUsuario extends Component {
         if(localStorage.getItem("id")  != '13'){
             window.location.href = "http://localhost:3000/"
         }else{
+            //Obtener todos los usuarios de la bd y almacenarlos en el arreglo usuarios
             const res = await axios.get('http://localhost:4000/api/usuarios')
             this.setState({ usuarios: res.data })
         }
         
     }
 
+
+    //Eliminar un usuario
     delete = async (id) => {
         if(id === 13){
             alert('Este usuario no se puede eliminar')
@@ -39,9 +43,10 @@ export default class MostrarUsuario extends Component {
         
     }
 
+
+    //Obtener todos los datos del usuario seleccionado para la creacion de la vista de edicion
     Obtener = async (id) => {
-        const { nombre,apellidoP,apellidoF,direccion,telefono,corre,contraseña,clave_cliente} = this.state.usuarios[id];
-        
+        const { nombre,apellidoP,apellidoF,direccion,telefono,corre,contraseña,clave_cliente} = this.state.usuarios[id]; 
         this.setState({nombre:nombre})
         this.setState({apellidoP:apellidoP})
         this.setState({apellidoF:apellidoF})
@@ -50,9 +55,9 @@ export default class MostrarUsuario extends Component {
         this.setState({corre:corre})
         this.setState({contraseña:contraseña})
         this.setState({id:clave_cliente})
-     
     }
 
+    //#region Codigo Html 
     render() {
         const { nombre,apellidoP,apellidoF,direccion,telefono,corre,contraseña,id} = this.state;
         return (
@@ -73,6 +78,8 @@ export default class MostrarUsuario extends Component {
                                 </tr>
                             </thead>
                             <tbody className="text-center">
+
+                                {/* Uso de la funcion map para desplegar todos los usuarios con formato */}
                                 {this.state.usuarios.map((user,index) =>
                                     
                                     <tr key={user.clave_cliente}>
@@ -99,4 +106,5 @@ export default class MostrarUsuario extends Component {
             </div>
         )
     }
+    //#endregion
 }

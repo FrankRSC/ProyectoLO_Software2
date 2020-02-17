@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import fondo from '../Imagenes/imgJumbo.jpg';
 
 export default class jumbotron extends Component {
+
+
+    //Animacion de letras
     componentDidMount() {
         let spans = document.querySelectorAll('.word span');
         spans.forEach((span, idx) => {

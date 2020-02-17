@@ -1,10 +1,14 @@
+//Modulo para la utilizacion de mysql
 const mysql = require('mysql');
 
-const { database} = require('./keys');
+//Solicitando las credenciales del archivo keys
+const {database} = require('./Keys');
+//modulo en caso de que devuelva un error marcarlo
 const {promisify} =  require('util')
 
+//Uso de las credenciasles para la conexion con la base de datos
+//Si ocurre un error, ocurrir los siguientes mensajes
 const pool =  mysql.createPool(database);
-
 pool.getConnection((err, connection) =>{
     if(err){
         if(err.code === 'PROTOCOL_CONNECTION_LOST'){

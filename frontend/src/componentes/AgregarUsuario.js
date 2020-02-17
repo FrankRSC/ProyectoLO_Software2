@@ -29,15 +29,16 @@ const initialState = {
 export default class AgregarUsuario extends Component {
 
     state = initialState;
-
-
-
+    //Revision de cambios en el campo de telefono
+    //Y Guardarlo en su respectiva variable
     onChangeTelefono = (e) => {
         this.setState({
             telefono: e.target.value
         })
     }
 
+
+    //Validacion de contraseña
     onChangePass = (e) => {
         this.setState({
             contraseña: e.target.value
@@ -48,8 +49,9 @@ export default class AgregarUsuario extends Component {
         var numbers = new RegExp("^(?=.*[0-9])");
         var lower = new RegExp("^(?=.*[a-z])");
         let valor
-
         var words = e.target.value
+
+        
         if (mayus.test(words) && special.test(words) && numbers.test(words) && lower.test(words)) {
             valor = 1
         } else {
@@ -84,6 +86,9 @@ export default class AgregarUsuario extends Component {
         }
     }
 
+
+    //Revisar que los campos sean validos
+    //Y almacenarlos en variables para su reenvio en el formulario
     onChangeString = (e) => {
         let valor
         var numbers = new RegExp("^(?=.*[0-9])");
@@ -120,6 +125,7 @@ export default class AgregarUsuario extends Component {
     }
 
 
+    //Almacenar los cambios que se realicen en el campo de direccion y correo
     onChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -152,6 +158,10 @@ export default class AgregarUsuario extends Component {
         this.setState(initialState);
     }
 
+
+    //Revisar si la casilla esta marcada
+    //Si no esta marcada cifrar el texto
+    //Si esta marcada mostrar la contraseña
     handleChecked = () => {
         this.setState({ isChecked: !this.state.isChecked });
 
@@ -162,6 +172,8 @@ export default class AgregarUsuario extends Component {
         }
     }
 
+
+    //Metodo de validacion de campos
     validar = () => {
         let nombreError = ''
         let apellidoPError = ''
@@ -208,6 +220,10 @@ export default class AgregarUsuario extends Component {
 
         return true;
     }
+
+
+    //#region Codigo Html
+
     render() {
         return (
             <div >
@@ -272,3 +288,4 @@ export default class AgregarUsuario extends Component {
     }
 }
 
+//#endregion

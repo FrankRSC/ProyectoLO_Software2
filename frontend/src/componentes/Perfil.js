@@ -30,18 +30,22 @@ export default class Perfil extends Component {
     }
 
     async componentDidMount() {
-        let a = [];
-        let b = [];
-        let c = [];
-        let d = [];
+        let ordenPendientes = [];
+        let ordenProceso = [];
+        let ordenFinalizadas = [];
+        let ordenRechazadas = [];
         if (localStorage.getItem("id") != '10000') {
+
+            //Obtner los datos del usuario logueado y guardarlos en el arreglo usuarios
             const res = await axios.get('http://localhost:4000/api/usuarios/' + localStorage.getItem("Correo"))
             this.setState({ usuarios: res.data })
+
+            //Obtener las ordenes del usuario y almacenarlas al ordenes
             const resOrdenes = await axios.get('http://localhost:4000/api/usuariosid/' + localStorage.getItem("id"))
             this.setState({ ordenes: resOrdenes.data })
-            console.log('http://localhost:4000/api/usuariosid/' + localStorage.getItem("id"))
-            const { nombre, apellidoP, apellidoF, direccion, telefono, corre, contraseña, clave_cliente } = this.state.usuarios[0];
 
+            //Guardar la informacion del usuario en variables para la manipulacion de la vista
+            const { nombre, apellidoP, apellidoF, direccion, telefono, corre, contraseña, clave_cliente } = this.state.usuarios[0];
             this.setState({ nombre: nombre })
             this.setState({ apellidoP: apellidoP })
             this.setState({ apellidoF: apellidoF })
@@ -51,39 +55,36 @@ export default class Perfil extends Component {
             this.setState({ contraseña: contraseña })
             this.setState({ id: clave_cliente })
 
-            console.log(this.state.ordenes[0])
 
+            //Filtrar las ordenes dependiendo de su estado y guardandolas en arreglos diferentes
             for (let i = 0; i < this.state.ordenes.length; i++) {
                 if (this.state.ordenes[i].clave_cliente === clave_cliente) {
                     if (this.state.ordenes[i].Estado === 1) {
-                        a.push(this.state.ordenes[i])
+                        ordenPendientes.push(this.state.ordenes[i])
                     } else if (this.state.ordenes[i].Estado === 2) {
-                        b.push(this.state.ordenes[i])
+                        ordenProceso.push(this.state.ordenes[i])
                     } else if (this.state.ordenes[i].Estado === 3) {
-                        c.push(this.state.ordenes[i])
+                        ordenFinalizadas.push(this.state.ordenes[i])
                     } else if (this.state.ordenes[i].Estado === 4) {
-                        d.push(this.state.ordenes[i])
+                        ordenRechazadas.push(this.state.ordenes[i])
                     }
                 }
             }
-            console.log(a)
-            console.log(b)
-            console.log(c)
-            console.log(d)
-            this.setState({ ordenesPendientes: a })
-            this.setState({ ordenesProceso: b })
-            this.setState({ ordenesFinalizadas: c })
-            this.setState({ ordenesRechazadas: d })
+
+            this.setState({ ordenesPendientes: ordenPendientes })
+            this.setState({ ordenesProceso: ordenProceso })
+            this.setState({ ordenesFinalizadas: ordenFinalizadas })
+            this.setState({ ordenesRechazadas: ordenRechazadas })
 
         } else {
-
-
             window.location.href = "http://localhost:3000/"
         }
 
 
     }
 
+
+    //Cambiar el estado de la orden a rechazada
     rechazar = async (id) => {
         const newOrden = {
             Estado: 4
@@ -92,6 +93,7 @@ export default class Perfil extends Component {
         window.location.reload();
     }
 
+    //Cambiar el estado de la orden a Aceptada
     aceptar = async (id) => {
         const newOrden = {
             Estado: 2
@@ -100,6 +102,7 @@ export default class Perfil extends Component {
         window.location.reload();
     }
 
+    //Cambiar el estado de la orden a Terminada
     Terminar = async (id) => {
         const newOrden = {
             Estado: 3
@@ -108,6 +111,7 @@ export default class Perfil extends Component {
         window.location.reload();
     }
 
+    //Cambiar el estado de la orden a Solicitada
     Solicitar = async (id) => {
         const newOrden = {
             Estado: 1
@@ -116,9 +120,10 @@ export default class Perfil extends Component {
         window.location.reload();
     }
 
+
+    //Obtener los datos del usuario para la creacion de la vista de edicion
     Obtener = async (id) => {
         const { nombre, apellidoP, apellidoF, direccion, telefono, corre, contraseña, clave_cliente } = this.state.usuarios[id];
-
         this.setState({ nombre: nombre })
         this.setState({ apellidoP: apellidoP })
         this.setState({ apellidoF: apellidoF })
@@ -127,10 +132,9 @@ export default class Perfil extends Component {
         this.setState({ corre: corre })
         this.setState({ contraseña: contraseña })
         this.setState({ id: clave_cliente })
-
     }
 
-
+    
     render() {
         const { nombre, apellidoP, apellidoF, direccion, telefono, corre, contraseña, id } = this.state;
 

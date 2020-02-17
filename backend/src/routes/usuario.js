@@ -1,22 +1,22 @@
 const {Router} = require('express');
 const router = Router();
 
-const {getUsuarios,getUsuariobyid, createUsuario, getUsuario,deleteUsuario,updateUsuario} = require('../controllers/usuario.controlador');
+const {getUsuarios,getUsuariobyid, createUsuario, getUsuario,deleteUsuario,updateUsuario} = require('../controllers/UsuarioControlador');
 
 router.route('/')
-    //Obtener
+    //utilizando el metodo get para hacer una peticion de obtencion del servidor
     .get(getUsuarios)
-    //Agregar
+    //Utilizando el metodo post para la solicitar agregar un usuario
     .post(createUsuario);
 
 router.route('/:id')
-    
+    //utilizando el metodo get para hacer una peticion de obtencion del servidor por una caracteristica definida
     .get(getUsuario)
     
     
-    //Actualizar algo en el servidor
+    //Actualizar un usuario por su id
     .put(updateUsuario)
-    //Borrar
+    //Borrar un usuario por su id
     .delete(deleteUsuario);
 
 

@@ -16,8 +16,10 @@ export default class OrdenesAdmin extends Component {
         }
     }
 
+    //Metodo de react que se utiliza para hacer acciones antes de que se dibuje la pagina
     async componentDidMount() {
         if(localStorage.getItem("id") === '13'){
+            //Obtener todas las ordenes y guardarlas en un arreglo dependiendo del estado
             const res = await axios.get('http://localhost:4000/api/ordenes')
             const resusuarios = await axios.get('http://localhost:4000/api/usuarios/')
             const resusuarios1 = await axios.get('http://localhost:4000/api/ordenes/1')
@@ -50,6 +52,8 @@ export default class OrdenesAdmin extends Component {
         return nombreCompleto
     }
 
+
+    //Cambiar de estado la orden a rechazada
     rechazar = async (id) => {
         const newOrden = {
             Estado: 4
@@ -58,6 +62,7 @@ export default class OrdenesAdmin extends Component {
         window.location.reload();
     }
 
+    //Cambiar de estado la orden a Aceptada
     aceptar = async (id) => {
         const newOrden = {
             Estado: 2
@@ -66,6 +71,7 @@ export default class OrdenesAdmin extends Component {
         window.location.reload();
     }
 
+    //Cambiar de estado la orden a Terminada
     Terminar = async (id) => {
         const newOrden = {
             Estado: 3
@@ -75,8 +81,9 @@ export default class OrdenesAdmin extends Component {
     }
 
     render() {
-        let nombre = []
+ 
         return (
+            //#region Codigo HTML
             <div style={{ margin: '7%' }}>
 
                 <section id="tabs" style={{ maxWidth: '100%' }}>
@@ -346,7 +353,7 @@ export default class OrdenesAdmin extends Component {
 
 
 
-
+//#endregion
         )
     }
 }

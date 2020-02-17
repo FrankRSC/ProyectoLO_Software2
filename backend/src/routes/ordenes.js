@@ -4,16 +4,18 @@ const router = Router();
 const {getOrdenes, createOrdenes, getOrden,deleteOrdenes,updateOrdenes} = require('../controllers/ordenes.controlador');
 
 router.route('/')
-    //Obtener
+    //Hacer una solictud get para obtener todas las ordenes
     .get(getOrdenes)
-    //Agregar
+    //Hacer una peticion post para crear las ordenes
     .post(createOrdenes);
 
 router.route('/:id')
+
+    //Hacer una peticion get para obtener un sola orden dependiendo del parametro pasado
     .get(getOrden)
-    // //Actualizar algo en el servidor
+    //Hacer una peticion put para actualizar una orden dependiendo del paramatero
     .put(updateOrdenes)
-    // //Borrar
+    //Borrar una orden
     .delete(deleteOrdenes);
 
 

@@ -8,13 +8,15 @@ export default class Tab extends Component {
         }
     }
 
+
+    //Obtener todas las ordenes
     async componentDidMount(){
         const res = await axios.get('http://localhost:4000/api/ordenes')
         this.setState({ ordenes: res.data })
     }
 
+    
     render() {
-
         let TablaPendiente =(
 
         <table className="table ">

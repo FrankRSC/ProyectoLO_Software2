@@ -5,7 +5,7 @@ const {createimages} = require('../controllers/images.controlador');
 
 router.route('/')
 
-    //Agregar
+    //Subir imagenes mediante la peticion post
     .post(createimages);
 
 

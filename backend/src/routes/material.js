@@ -4,7 +4,7 @@ const router = Router();
 const {getMateriales} = require('../controllers/material.controlador');
 
 router.route('/')
-    //Obtener
+    //Obtener Todos los materiales mediante la peticion get
     .get(getMateriales)
 
 

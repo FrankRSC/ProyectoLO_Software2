@@ -1,8 +1,10 @@
+
+
+//#region Componentes Importados
 import React from 'react';
 import { Route, BrowserRouter as Router, Redirect } from 'react-router-dom'
 import Usuarios from './componentes/MostrarUsuario';
 import Login from './componentes/Login'
-
 import Nav from './componentes/Navbar'
 import Aparatos from './componentes/Aparatos'
 import Jumbo from './componentes/jumbotron'
@@ -15,12 +17,13 @@ import Perfil from './componentes/Perfil'
 import OrdenesAdmin from './componentes/OrdenesAdmin'
 import ContenidoAdmin from './componentes/ContenidoAdmin'
 import './App.css';
+//#endregion
 
 
+//Clase Princpal de la pagina web en donde se mandan llamar
+//A todos los componentes(Se denomina clase padre)
 export default class App extends React.Component {
-
   render() {
-
     return (
       <Router>
         <Route path="/"
@@ -30,9 +33,7 @@ export default class App extends React.Component {
                 <Nav Contenido={
                   [
                     <Error />
-
                   ]} />
-
               </div>
             );
           }}
@@ -80,9 +81,7 @@ export default class App extends React.Component {
               <div>
                 <Nav Contenido={
                   [
-
                     <ContenidoAdmin />
-
                   ]} />
               </div>
             );

@@ -30,25 +30,33 @@ export default class Login extends Component {
     }
 
 
+    //Almacena lo que esta la caja de texto contraseña en la variable pass
     onChangepass = (pass) => {
         this.setState({ inputPass: pass.target.value })
     }
 
-    comprobar = async () => {
 
+    //Validar si el usuario y contraseña introduccido esta en la base de datos(***BUSCAR UNA MEJOR MANERA***)
+    comprobar = async () => {
+        //Llamar la funcion de validacion de campos
         const isvalid = this.validar();
+
+        //Si los campos esta correctos proceder a buscar al usuario a la base de datos
         if(isvalid){
             const { inputCorreo, inputPass } = this.state;
             const datos = await axios.get('http://localhost:4000/api/usuarios/' + inputCorreo)
         
-            console.log(datos.data.length)
             if(datos.data.length != 1){
+
+                //Cambiar las etiquetas de texto por un error
                 document.getElementById('info').innerHTML = "Usuario o contraseña inconrrecto "
                 this.setState({ Bienvenida: 'Error al iniciar sesion' })
             }else{
                 const { contraseña, nombre, apellidoP, corre, clave_cliente } = datos.data[0];
     
                 if (inputPass === contraseña) {
+
+                    //Si inicia sesion como admin los datos se almacenan en local storage
                     if (corre === 'admin@hotmail.com') {
                         localStorage.setItem("Usuario", nombre + " " + apellidoP)
                         localStorage.setItem("Nombre", nombre);
@@ -59,6 +67,7 @@ export default class Login extends Component {
         
                     } else {
 
+                        //Si inicia sesion como un usuario comun inicia sesion como usuario comun
                         localStorage.setItem("Usuario", nombre + " " + apellidoP)
                         localStorage.setItem("Correo", corre);
                         localStorage.setItem("id", clave_cliente)
@@ -73,16 +82,15 @@ export default class Login extends Component {
                     this.setState({ Bienvenida: 'Error al iniciar sesion' })
                 }
             }
-        }
-       
-       
+        }   
     }
 
+
+    //Validacion de campos
     validar= () =>{
         let correoError = "";
         let contraseñaError =  "";
 
-        
         if(!this.state.inputCorreo.includes('@hotmail.com')  && !this.state.inputCorreo.includes('@gmail.com') && !this.state.inputCorreo.includes('@yahoo.com')){
             correoError = '*Correo invalido';
         }
@@ -100,6 +108,7 @@ export default class Login extends Component {
     }
 
 
+//#region Codigo html
     render() {
         return (
             
@@ -153,6 +162,6 @@ export default class Login extends Component {
             </div>
         )
 
-
+//#endregion
     }
 }

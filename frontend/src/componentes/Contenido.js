@@ -9,30 +9,33 @@ import producto from '../Imagenes/producto.jpg';
 import producto1 from '../Imagenes/producto1.jpg';
 import producto2 from '../Imagenes/producto2.jpg';
 
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import JUMBO from './jumbotron'
 
 export default class Contenido extends Component {
+
+    //Eventos que se activan al cargar la pagina
     componentDidMount(){
-        localStorage.setItem("id", 10000)
-        
+        //Asignar el id del usuario a 10000 porque es el contenido de un usuario no registrado
+        localStorage.setItem("id", 10000)   
         if(localStorage.getItem("id") != '10000'){
+            //Redireccion a pagina de inicio
             window.location.href = "http://localhost:3000/"
         }
     }
 
 
+    //Redireccionar a pagina de aparatos
     verAparatos = () => {
         window.location.href = "http://localhost:3000/Aparatos"
     }
+
 
     render() {
         return (
             <div className="body">
                 <div className="App">
                     <JUMBO/>
-
-
                     <div class="featurette-divider"></div>
 
                     <div class="row featurette">

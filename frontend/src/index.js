@@ -1,3 +1,5 @@
+//Apartado de react en el que se importan los estilos
+// Y que pagina va ser la principal
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
